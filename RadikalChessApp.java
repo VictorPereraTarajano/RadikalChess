@@ -1,4 +1,3 @@
-package aima.gui.applications.search.games;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,17 +19,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import aima.core.environment.radikalchess.RadikalChessAction;
-import aima.core.environment.radikalchess.RadikalChessGame;
-import aima.core.environment.radikalchess.RadikalChessPiece;
-import aima.core.environment.radikalchess.RadikalChessState;
-import aima.core.environment.radikalchess.heuristics.RadikalChessHeuristics;
+import RadikalChessAction;
+import RadikalChessGame;
+import RadikalChessPiece;
+import RadikalChessState;
+import RadikalChessHeuristics;
 import aima.core.search.adversarial.AdversarialSearch;
-import aima.core.search.adversarial.AlphaBetaSearchLimited;
-import aima.core.search.adversarial.MinimaxSearchLimited;
-import aima.core.search.framework.HeuristicFunction;
-import aima.core.search.framework.Metrics;
-import aima.core.util.datastructure.XYLocation;
+import AlphaBetaSearchLimited;
+import MinimaxSearchLimited;
+import HeuristicFunction;
+import Metrics;
+import XYLocation;
 
 public class RadikalChessApp extends JFrame implements MouseListener {
 	
