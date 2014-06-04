@@ -1,11 +1,10 @@
-package aima.core.environment.radikalchess.heuristics;
 
 import java.util.ArrayList;
 
-import aima.core.environment.radikalchess.RadikalChessPiece;
-import aima.core.environment.radikalchess.RadikalChessState;
-import aima.core.search.framework.HeuristicFunction;
-import aima.core.util.datastructure.XYLocation;
+import RadikalChessPiece;
+import RadikalChessState;
+import HeuristicFunction;
+import XYLocation;
 
 public class RadikalChessHeuristics implements HeuristicFunction {
 	
