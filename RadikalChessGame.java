@@ -1,9 +1,8 @@
-package aima.core.environment.radikalchess;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import aima.core.search.adversarial.Game;
+import Game;
 
 
 public class RadikalChessGame implements Game<RadikalChessState, RadikalChessAction, String> {
