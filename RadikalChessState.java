@@ -1,12 +1,11 @@
-package aima.core.environment.radikalchess;
 
 import java.util.ArrayList;
-import aima.core.environment.radikalchess.pieces.Bishop;
-import aima.core.environment.radikalchess.pieces.Castle;
-import aima.core.environment.radikalchess.pieces.King;
-import aima.core.environment.radikalchess.pieces.Pawn;
-import aima.core.environment.radikalchess.pieces.Queen;
-import aima.core.util.datastructure.XYLocation;
+import aBishop;
+import Castle;
+import King;
+import Pawn;
+import Queen;
+import XYLocation;
 
 public class RadikalChessState implements Cloneable {
 	
