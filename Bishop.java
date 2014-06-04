@@ -1,12 +1,10 @@
-package aima.core.environment.radikalchess.pieces;
-
 import java.util.ArrayList;
 
-import aima.core.environment.radikalchess.RadikalChessAction;
-import aima.core.environment.radikalchess.RadikalChessPiece;
-import aima.core.environment.radikalchess.RadikalChessState;
-import aima.core.environment.radikalchess.heuristics.EuclideDistance;
-import aima.core.util.datastructure.XYLocation;
+import RadikalChessAction;
+import RadikalChessPiece;
+import RadikalChessState;
+import EuclideDistance;
+import XYLocation;
 
 public class Bishop  extends RadikalChessPiece {
 	
