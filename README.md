@@ -12,4 +12,11 @@ RadikalChess is a variant of the traditional chess game. On it you've less piece
                                   |PW PW PW PW|
                                   |CW BW QW KW|
 
-To use this program
+The rules are the followings:
+
+      1. The Pawn's first move always will be of a one square.
+      2. There is not castling on this game.
+      3. The non-capture movements, unless if that move can do a mate, the piece must be closer to the enemy king. That rule          doesn't apply to the Pawn's pieces. 
+      4. The game is terminal when one of the player loses her King or don't have movements available to that game-state.
+      
+To use this program you have to execute RadikalChessApp class which contains an UI of the game.
