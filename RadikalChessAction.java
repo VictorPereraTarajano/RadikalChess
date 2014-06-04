@@ -1,6 +1,5 @@
-package aima.core.environment.radikalchess;
 
-import aima.core.util.datastructure.XYLocation;
+import XYLocation;
 
 public class RadikalChessAction  {
 
