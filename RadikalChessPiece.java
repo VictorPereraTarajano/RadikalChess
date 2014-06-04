@@ -1,7 +1,6 @@
-package aima.core.environment.radikalchess;
 
 import java.util.ArrayList;
-import aima.core.util.datastructure.XYLocation;
+import YLocation;
 
 public abstract class RadikalChessPiece implements Cloneable {
 	
