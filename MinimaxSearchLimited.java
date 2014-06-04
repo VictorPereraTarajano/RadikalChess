@@ -1,7 +1,6 @@
-package aima.core.search.adversarial;
 
-import aima.core.search.framework.HeuristicFunction;
-import aima.core.search.framework.Metrics;
+import HeuristicFunction;
+import Metrics;
 
 public class MinimaxSearchLimited<STATE, ACTION, PLAYER> implements
 		AdversarialSearch<STATE, ACTION> {
