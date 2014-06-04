@@ -1,6 +1,5 @@
-package aima.core.environment.radikalchess.heuristics;
 
-import aima.core.util.datastructure.XYLocation;
+import XYLocation;
 
 public class EuclideDistance  {
 
