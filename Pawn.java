@@ -1,11 +1,10 @@
-package aima.core.environment.radikalchess.pieces;
 
-import aima.core.environment.radikalchess.RadikalChessAction;
+import RadikalChessAction;
 import java.util.ArrayList;
 
-import aima.core.environment.radikalchess.RadikalChessPiece;
-import aima.core.environment.radikalchess.RadikalChessState;
-import aima.core.util.datastructure.XYLocation;
+import RadikalChessPiece;
+import RadikalChessState;
+import XYLocation;
 
 public class Pawn extends RadikalChessPiece {
 	
