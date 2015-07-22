@@ -1,11 +1,9 @@
+package game;
+
+import pieces.*;
+import utilities.XYLocation;
 
 import java.util.ArrayList;
-import aBishop;
-import Castle;
-import King;
-import Pawn;
-import Queen;
-import XYLocation;
 
 public class RadikalChessState implements Cloneable {
 	

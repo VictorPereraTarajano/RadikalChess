@@ -1,26 +1,27 @@
+package pieces;
 
-import RadikalChessAction;
+import game.RadikalChessAction;
+import game.RadikalChessPiece;
+import game.RadikalChessState;
+import utilities.EuclideDistance;
+import utilities.XYLocation;
+
 import java.util.ArrayList;
 
-import RadikalChessPiece;
-import RadikalChessState;
-import EuclideDistance;
-import XYLocation;
-
-public class Queen extends RadikalChessPiece {
+public class Castle extends RadikalChessPiece {
 	
-	public Queen (int color, XYLocation loc) {
+	public Castle (int color, XYLocation loc) {
 		super(color, loc);
 	}
 
 	@Override
 	public String toString() {
-		return (color == 1)?"QN":"QB";
+		return (this.color == 1)?"TN":"TB";
 	}
 	
 	@Override
 	public double getPathCost() {
-		return 9;
+		return 7;
 	}
 
 	@Override
@@ -28,37 +29,38 @@ public class Queen extends RadikalChessPiece {
 		XYLocation KingXYLocation = state.getPieceXYLocation("K"+(this.color == 1?"B":"N"));
 		ArrayList<XYLocation> validMoves = new ArrayList<>();
 		int distInitial = EuclideDistance.distanceTo(this.loc, KingXYLocation);
-		if (!isDangerMove(this, state)) {
-			for (XYLocation location : queenMovements(this, state)) {
+		if (!RadikalChessPiece.isDangerMove(this, state)) {
+			for (XYLocation location : RadikalChessPiece.castleMovements(this, state)) {
 				RadikalChessState newState = state.clone();
 				newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-				if (!isDangerMove(this, newState)) {
+				if (!RadikalChessPiece.isDangerMove(this, newState)) {
 					if (state.isEnemyHere(this, location)) {
-						if (state.getValue(location.getXCoOrdinate(), location.getYCoOrdinate()).toString().contains("K"+(this.color == 1?"B":"N"))) {
+						if (state.getValue(location.getXCoOrdinate(), location.getYCoOrdinate()).toString().contains("K" + (this.color == 1 ? "B" : "N"))) {
 							validMoves.clear();
 							validMoves.add(location);
 							return validMoves;
 						} else 
 							validMoves.add(location);
 					} else {
-						if (distInitial > EuclideDistance.distanceTo(location, KingXYLocation)) 
+						if (distInitial > EuclideDistance.distanceTo(location, KingXYLocation))  {
 							validMoves.add(location);
-						else {
-							if (queenMovements(this, newState).contains(KingXYLocation))
+						} else {
+							if (RadikalChessPiece.castleMovements(this, newState).contains(KingXYLocation)) {
 								validMoves.add(location);
+							}
 						}
 					}
 				}
 			}
 		} else {
-			for (XYLocation location : queenMovements(this, state)) {
+			for (XYLocation location : RadikalChessPiece.castleMovements(this, state)) {
 				RadikalChessState newState = state.clone();
 				newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-				if (!isDangerMove(this, newState)) {
+				if (!RadikalChessPiece.isDangerMove(this, newState)) {
 					validMoves.add(location);
+					return validMoves;
 				}
 			}
-			return validMoves;
 		}
 		return validMoves;
 	}

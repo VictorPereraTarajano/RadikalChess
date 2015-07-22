@@ -1,5 +1,6 @@
+package game;
 
-import XYLocation;
+import utilities.XYLocation;
 
 public class RadikalChessAction  {
 

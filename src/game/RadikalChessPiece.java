@@ -1,6 +1,8 @@
+package game;
+
+import utilities.XYLocation;
 
 import java.util.ArrayList;
-import YLocation;
 
 public abstract class RadikalChessPiece implements Cloneable {
 	
@@ -35,7 +37,7 @@ public abstract class RadikalChessPiece implements Cloneable {
 			copy = (RadikalChessPiece) super.clone();
 			copy.isOnJaque = isOnJaque;
 		} catch (CloneNotSupportedException e) {
-			System.out.println("Error : RadikalChessPiece clone");
+			System.out.println("Error : game.RadikalChessPiece clone");
 		}
 		return copy;
 	}

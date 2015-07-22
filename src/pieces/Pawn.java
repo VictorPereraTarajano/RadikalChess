@@ -1,10 +1,11 @@
+package pieces;
 
-import RadikalChessAction;
+import game.RadikalChessAction;
+import game.RadikalChessPiece;
+import game.RadikalChessState;
+import utilities.XYLocation;
+
 import java.util.ArrayList;
-
-import RadikalChessPiece;
-import RadikalChessState;
-import XYLocation;
 
 public class Pawn extends RadikalChessPiece {
 	
@@ -26,31 +27,31 @@ public class Pawn extends RadikalChessPiece {
 	public ArrayList<XYLocation> getValidMoves(RadikalChessState state) {
 		XYLocation KingXYLocation = state.getPieceXYLocation("K"+(this.color == 1?"B":"N"));
 		ArrayList<XYLocation> validMoves = new ArrayList<>();
-		if (!isDangerMove(this, state)) {
-			for (XYLocation location : pawnMovements(this, state)) {
+		if (!RadikalChessPiece.isDangerMove(this, state)) {
+			for (XYLocation location : RadikalChessPiece.pawnMovements(this, state)) {
 				RadikalChessState newState = state.clone();
 				newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-				if (!isDangerMove(this, newState)) {
+				if (!RadikalChessPiece.isDangerMove(this, newState)) {
 					validMoves.add(location);
 					if (state.isEnemyHere(this, location)) {
-						if (state.getValue(location.getXCoOrdinate(), location.getYCoOrdinate()).toString().contains("K"+(this.color == 1?"B":"N"))) {
+						if (state.getValue(location.getXCoOrdinate(), location.getYCoOrdinate()).toString().contains("K" + (this.color == 1 ? "B" : "N"))) {
 							validMoves.clear();
 							validMoves.add(location);
 							return validMoves;
 						}
 					} else {
 						if (!state.isEnemyHere(this, location)) {
-							if (pawnEatMovements(this, newState).contains(KingXYLocation))
+							if (RadikalChessPiece.pawnEatMovements(this, newState).contains(KingXYLocation))
 								validMoves.add(location);
 						}
 					}
 				}
 			}
 		} else {
-			for (XYLocation location : pawnNonEatMovements(this, state)) {
+			for (XYLocation location : RadikalChessPiece.pawnNonEatMovements(this, state)) {
 				RadikalChessState newState = state.clone();
 				newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-				if (!isDangerMove(this, newState)) {
+				if (!RadikalChessPiece.isDangerMove(this, newState)) {
 					validMoves.add(location);
 					return validMoves;
 				}

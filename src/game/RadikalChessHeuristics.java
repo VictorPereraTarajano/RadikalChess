@@ -1,10 +1,10 @@
+package game;
+
+import utilities.EuclideDistance;
+import utilities.HeuristicFunction;
+import utilities.XYLocation;
 
 import java.util.ArrayList;
-
-import RadikalChessPiece;
-import RadikalChessState;
-import HeuristicFunction;
-import XYLocation;
 
 public class RadikalChessHeuristics implements HeuristicFunction {
 	

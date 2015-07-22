@@ -1,8 +1,7 @@
+package game;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Game;
 
 
 public class RadikalChessGame implements Game<RadikalChessState, RadikalChessAction, String> {

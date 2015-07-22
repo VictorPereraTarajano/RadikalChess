@@ -1,10 +1,12 @@
-import java.util.ArrayList;
+package pieces;
 
-import RadikalChessAction;
-import RadikalChessPiece;
-import RadikalChessState;
-import EuclideDistance;
-import XYLocation;
+import game.RadikalChessAction;
+import game.RadikalChessPiece;
+import game.RadikalChessState;
+import utilities.EuclideDistance;
+import utilities.XYLocation;
+
+import java.util.ArrayList;
 
 public class Bishop  extends RadikalChessPiece {
 	
@@ -27,11 +29,11 @@ public class Bishop  extends RadikalChessPiece {
 		XYLocation KingXYLocation = state.getPieceXYLocation("K"+(this.color == 1?"B":"N"));
 		ArrayList<XYLocation> validMoves = new ArrayList<>();
 		int distInitial = EuclideDistance.distanceTo(this.loc, KingXYLocation);
-		if (!isDangerMove(this, state)) {
-			for (XYLocation location : bishopMovements(this, state)) {
+		if (!RadikalChessPiece.isDangerMove(this, state)) {
+			for (XYLocation location : RadikalChessPiece.bishopMovements(this, state)) {
 				RadikalChessState newState = state.clone();
 				newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-				if (!isDangerMove(this, newState)) {
+				if (!RadikalChessPiece.isDangerMove(this, newState)) {
 					if (state.isEnemyHere(this, location)) {
 						if (state.getValue(location.getXCoOrdinate(), location.getYCoOrdinate()).toString().contains("K"+(this.color == 1?"B":"N"))) {
 							validMoves.clear();
@@ -43,17 +45,17 @@ public class Bishop  extends RadikalChessPiece {
 						if (distInitial > EuclideDistance.distanceTo(location, KingXYLocation)) 
 							validMoves.add(location);
 						else {
-							if (bishopMovements(this, newState).contains(KingXYLocation)) 
+							if (RadikalChessPiece.bishopMovements(this, newState).contains(KingXYLocation))
 								validMoves.add(location);
 						}
 					}
 				}
 			}
 		} else {
-			for (XYLocation location : bishopMovements(this, state)) {
+			for (XYLocation location : RadikalChessPiece.bishopMovements(this, state)) {
 				RadikalChessState newState = state.clone();
 				newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-				if (!isDangerMove(this, newState)) {
+				if (!RadikalChessPiece.isDangerMove(this, newState)) {
 					validMoves.add(location);
 					return validMoves;
 				}

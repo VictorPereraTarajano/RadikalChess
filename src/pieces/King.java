@@ -1,11 +1,12 @@
+package pieces;
 
-import RadikalChessAction;
+import game.RadikalChessAction;
+import game.RadikalChessPiece;
+import game.RadikalChessState;
+import utilities.EuclideDistance;
+import utilities.XYLocation;
+
 import java.util.ArrayList;
-
-import RadikalChessPiece;
-import RadikalChessState;
-import EuclideDistance;
-import XYLocation;
 
 public class King extends RadikalChessPiece {
 	
@@ -28,10 +29,10 @@ public class King extends RadikalChessPiece {
 		XYLocation KingXYLocation = state.getPieceXYLocation("K"+(this.color == 1?"B":"N"));
 		ArrayList<XYLocation> validMoves = new ArrayList<>();
 		int distInitial = EuclideDistance.distanceTo(this.loc, KingXYLocation);
-		for (XYLocation location : kingMovements(this, state)) {
+		for (XYLocation location : RadikalChessPiece.kingMovements(this, state)) {
 			RadikalChessState newState = state.clone();
 			newState.movePiece(new RadikalChessAction(this.loc, this), this.loc , location, false);
-			if (!isDangerMove(this, newState)) {
+			if (!RadikalChessPiece.isDangerMove(this, newState)) {
 				if (state.isEnemyHere(this, location)) {
 					if (state.getValue(location.getXCoOrdinate(), location.getYCoOrdinate()).toString().contains("K"+(this.color == 1?"B":"N"))) {
 						validMoves.clear();
@@ -43,7 +44,7 @@ public class King extends RadikalChessPiece {
 					if (distInitial > EuclideDistance.distanceTo(location, KingXYLocation)) 
 						validMoves.add(location);
 					else {
-						if (kingMovements(this, newState).contains(KingXYLocation))
+						if (RadikalChessPiece.kingMovements(this, newState).contains(KingXYLocation))
 							validMoves.add(location);
 					}
 				}

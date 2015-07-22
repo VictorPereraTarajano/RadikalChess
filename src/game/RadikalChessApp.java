@@ -1,35 +1,18 @@
+package game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import adversialsearch.AdversarialSearch;
+import adversialsearch.AlphaBetaSearchLimited;
+import adversialsearch.MinimaxSearchLimited;
+import utilities.HeuristicFunction;
+import utilities.Metrics;
+import utilities.XYLocation;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import RadikalChessAction;
-import RadikalChessGame;
-import RadikalChessPiece;
-import RadikalChessState;
-import RadikalChessHeuristics;
-import aima.core.search.adversarial.AdversarialSearch;
-import AlphaBetaSearchLimited;
-import MinimaxSearchLimited;
-import HeuristicFunction;
-import Metrics;
-import XYLocation;
 
 public class RadikalChessApp extends JFrame implements MouseListener {
 	
@@ -40,8 +23,8 @@ public class RadikalChessApp extends JFrame implements MouseListener {
 	private static Color White= Color.WHITE;
 	
 	private RadikalChessButton [] [] boardGUI;
-	private RadikalChessGame game;
-	private RadikalChessState currentState;
+	private game.RadikalChessGame game;
+	private game.RadikalChessState currentState;
 	
 	private JPanel gamePanel, appPanel;
 	private JLabel statusBar;
@@ -59,7 +42,7 @@ public class RadikalChessApp extends JFrame implements MouseListener {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public RadikalChessApp () {
 		super("RadikalChess");
-		this.setIconImage(new ImageIcon(getClass().getResource("KN.png")).getImage());
+		this.setIconImage(new ImageIcon(getClass().getResource("/res/KN.png")).getImage());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(posX, posY, width, height);
 		
@@ -94,66 +77,41 @@ public class RadikalChessApp extends JFrame implements MouseListener {
 		
 		boardGUI = new RadikalChessButton [currentState.getRows()] [currentState.getColumns()];
 		
-		proposeMove.addActionListener(new ActionListener () {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (!game.isTerminal(currentState)) {
-					proposeMove();
-				}
-			}
-			
-			});
+		proposeMove.addActionListener(arg0 -> {
+            if (!game.isTerminal(currentState)) {
+                proposeMove();
+            }
+        });
 		
-		clear.addActionListener(new ActionListener () {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				gameReviewIterator = 0;
-				currentState = game.getInitialState();
-				gameReviewB.setEnabled(false);
-				gameReviewF.setEnabled(false);
-				repaintBoardGUI(currentState);
-				updateStatus();
-			}
-			
-		});
+		clear.addActionListener(arg0 -> {
+            gameReviewIterator = 0;
+            currentState = game.getInitialState();
+            gameReviewB.setEnabled(false);
+            gameReviewF.setEnabled(false);
+            repaintBoardGUI(currentState);
+            updateStatus();
+        });
 		
-		recreateBoard.addActionListener(new ActionListener () {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				recreateBoardGUI();
-				gameReviewB.setEnabled(false);
-				gameReviewF.setEnabled(false);
-				updateStatus();
-			}
-			
-		});
+		recreateBoard.addActionListener(arg0 -> {
+            recreateBoardGUI();
+            gameReviewB.setEnabled(false);
+            gameReviewF.setEnabled(false);
+            updateStatus();
+        });
 		
-		gameReviewF.addActionListener(new ActionListener () {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (gameReviewIterator < gameReview.size() - 1) {
-					gameReviewIterator++;
-					repaintBoardGUI(gameReview.get(gameReviewIterator));
-				}
-			}
-			
-		});
+		gameReviewF.addActionListener(arg0 -> {
+            if (gameReviewIterator < gameReview.size() - 1) {
+                gameReviewIterator++;
+                repaintBoardGUI(gameReview.get(gameReviewIterator));
+            }
+        });
 		
-		gameReviewB.addActionListener(new ActionListener () {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (gameReviewIterator > 0) {
-					gameReviewIterator--;
-					repaintBoardGUI(gameReview.get(gameReviewIterator));
-				}
-			}
-			
-		});
+		gameReviewB.addActionListener(arg0 -> {
+            if (gameReviewIterator > 0) {
+                gameReviewIterator--;
+                repaintBoardGUI(gameReview.get(gameReviewIterator));
+            }
+        });
 		
 		initBoardGUI(currentState);
 		
@@ -290,10 +248,10 @@ public class RadikalChessApp extends JFrame implements MouseListener {
 		AdversarialSearch<RadikalChessState, RadikalChessAction> search;
 		switch (comboBoxAlg.getSelectedIndex()) {
 			case 0:
-					search = MinimaxSearchLimited.createFor(game,3, getEvalComboBox());
+					search = MinimaxSearchLimited.createFor(game, 3, getEvalComboBox());
 					break;
 			default:
-					search = AlphaBetaSearchLimited.createFor(game,3, getEvalComboBox());
+					search = AlphaBetaSearchLimited.createFor(game, 3, getEvalComboBox());
 		}
 		RadikalChessAction action = search.makeDecision(currentState);
 		searchMetrics = search.getMetrics();
@@ -432,7 +390,7 @@ public class RadikalChessApp extends JFrame implements MouseListener {
 		}
 		
 		private void selectIconPiece (String piece) {
-			ImageIcon icon = new ImageIcon(getClass().getResource(piece.toString()+".png"));
+			ImageIcon icon = new ImageIcon(getClass().getResource("/res/"+piece.toString()+".png"));
 			this.setIcon(new ImageIcon(icon.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
 		}
 	}

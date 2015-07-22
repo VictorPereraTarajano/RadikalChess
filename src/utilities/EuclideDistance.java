@@ -1,5 +1,4 @@
-
-import XYLocation;
+package utilities;
 
 public class EuclideDistance  {
 
